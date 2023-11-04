@@ -88,6 +88,24 @@ function makeTodo(todoObject) {
   return container;
 }
 
+function addTaskToCompleted(todoId) {
+  const todoTarget = findTodo(todoId);
+
+  if (todoTarget == null) return;
+
+  todoTarget.isCompleted = true;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function findTodo(todoId) {
+  for (const todoItem of todos) {
+    if (todoItem.id === todoId) {
+      return todoItem;
+    }
+  }
+  return null;
+}
+
 document.addEventListener(RENDER_EVENT, function () {
   const uncompletedTODOList = document.getElementById("todos");
   uncompletedTODOList.innerHTML = "";
